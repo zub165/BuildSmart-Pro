@@ -1,62 +1,83 @@
-# Construction Cost Estimator
+# BuildSmart Pro - Construction Cost Estimator
 
-A comprehensive web application for estimating construction costs in Pakistan, featuring interactive calculators, material price tracking, and contractor directory.
+BuildSmart Pro is a comprehensive web application designed to help users estimate construction costs, explore different architectural styles, and manage construction projects globally. The application features an interactive guide system, dynamic home style gallery, and detailed phase management for construction projects.
 
 ## Features
 
-- **Interactive Cost Calculator**
-  - Property size selection (5 Marla, 10 Marla, 1 Kanal)
-  - Construction type options (Grey Structure, Finishing)
-  - Location-based pricing (Karachi, Lahore, Islamabad)
-  - Visual cost breakdown chart
+- **Interactive Home Gallery**
+  - Browse various architectural styles (Spanish, American, Turkish, Iranian, etc.)
+  - Edit, replace, and manage home designs
+  - Slideshow with automatic transitions
+  - Responsive design for all devices
 
-- **Material Price Tracking**
-  - Real-time material prices
-  - Price trends and changes
-  - Supplier information
-  - Regular updates
+- **Construction Phase Management**
+  - Detailed phase tracking (Planning, Foundation, Structure, Utilities, Finishing)
+  - Progress tracking system
+  - Cost and duration estimates
+  - Material requirements and checklists
 
-- **Construction Phase Guide**
-  - Step-by-step construction process
-  - Visual progress tracking
-  - Detailed phase information
+- **Modern UI/UX**
+  - Clean, intuitive interface
+  - Responsive design
+  - Interactive elements
+  - Smooth animations and transitions
 
-- **Contractor Directory**
-  - Verified contractor listings
-  - Rating and review system
-  - Portfolio showcase
-  - Contact options
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/zub165/BuildSmart-Pro.git
+   ```
+
+2. Open `index.html` in your web browser to start using the application.
 
 ## Project Structure
 
 ```
-/buildsmart-construction-estimator/
-├── index.html          # Main HTML file
+BuildSmart-Pro/
+├── assets/
+│   └── images/
 ├── css/
-│   └── style.css      # Stylesheets
+│   ├── floor-plan.css
+│   ├── gallery.css
+│   ├── guide.css
+│   ├── home.css
+│   ├── navigation.css
+│   └── style.css
 ├── js/
-│   └── main.js        # JavaScript functionality
-└── README.md          # Project documentation
+│   ├── animation-manager.js
+│   ├── custom-steps.js
+│   ├── floor-plan.js
+│   ├── gallery-manager.js
+│   ├── main.js
+│   ├── navigation.js
+│   ├── phase-manager.js
+│   └── tabs.js
+├── pages/
+│   ├── estimator.html
+│   ├── floor-plan.html
+│   ├── guide.html
+│   ├── home.html
+│   └── reference.html
+├── translations/
+│   └── en.json
+├── index.html
+└── README.md
 ```
 
-## Setup
+## Key Components
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/construction-cost-estimator.git
-```
+1. **Gallery Manager**: Handles the display and management of different home styles
+2. **Phase Manager**: Controls construction phase progression and tracking
+3. **Animation Manager**: Manages UI animations and transitions
+4. **Navigation System**: Handles page routing and menu interactions
 
-2. Open `index.html` in your web browser or serve it using a local server:
-```bash
-python -m http.server 8000
-```
+## Browser Support
 
-3. Visit `http://localhost:8000` in your browser
-
-## Dependencies
-
-- Font Awesome 6.0.0 (for icons)
-- Chart.js (for cost breakdown visualization)
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ## Contributing
 
@@ -68,10 +89,4 @@ python -m http.server 8000
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Material prices sourced from local market data
-- Contractor information provided by verified sources
-- Cost calculation formulas based on industry standards 
+This project is licensed under the MIT License - see the LICENSE file for details. 
