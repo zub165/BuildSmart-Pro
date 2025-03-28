@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Guide - BuildSmart Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/guide.css">
+</head>
+<body>
+    <!-- Navigation placeholder -->
+    <nav id="navbar"></nav>
+
+    <main>
+        <section class="guide">
+            <div class="container">
+                <h1>Construction Guide</h1>
+                <p class="section-subtitle">Step-by-step guidance for your construction project</p>
+
+                <!-- Progress Tracker -->
+                <div class="progress-tracker">
+                    <div class="progress-bar" style="width: 0%"></div>
+                    <div class="phase-indicators">
+                        <div class="phase-indicator active" data-phase="planning">
+                            <i class="fas fa-clipboard"></i>
+                            <span>Planning</span>
+                        </div>
+                        <div class="phase-indicator" data-phase="foundation">
+                            <i class="fas fa-layer-group"></i>
+                            <span>Foundation</span>
+                        </div>
+                        <div class="phase-indicator" data-phase="structure">
+                            <i class="fas fa-building"></i>
+                            <span>Structure</span>
+                        </div>
+                        <div class="phase-indicator" data-phase="utilities">
+                            <i class="fas fa-plug"></i>
+                            <span>Utilities</span>
+                        </div>
+                        <div class="phase-indicator" data-phase="finishing">
+                            <i class="fas fa-paint-roller"></i>
+                            <span>Finishing</span>
+                        </div>
+                    </div>
+                    <div class="current-phase">Current Phase: Planning</div>
+                </div>
+
+                <!-- Phase Navigation -->
+                <div class="phase-navigation">
+                    <button class="phase-btn active" data-phase="planning">
+                        <i class="fas fa-clipboard"></i>
+                        Planning
+                    </button>
+                    <button class="phase-btn" data-phase="foundation">
+                        <i class="fas fa-layer-group"></i>
+                        Foundation
+                    </button>
+                    <button class="phase-btn" data-phase="structure">
+                        <i class="fas fa-building"></i>
+                        Structure
+                    </button>
+                    <button class="phase-btn" data-phase="utilities">
+                        <i class="fas fa-plug"></i>
+                        Utilities
+                    </button>
+                    <button class="phase-btn" data-phase="finishing">
+                        <i class="fas fa-paint-roller"></i>
+                        Finishing
+                    </button>
+                </div>
+
+                <!-- Phase Content -->
+                <div class="phase-content">
+                    <!-- Planning Phase Tools -->
+                    <div class="planning-tools">
+                        <div class="site-analysis">
+                            <h3>Site Analysis Tools</h3>
+                            <div class="tool-content">
+                                <div class="form-group">
+                                    <label for="site-location">Site Location</label>
+                                    <input type="text" id="site-location" placeholder="Enter site address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="site-size">Site Size (sq ft)</label>
+                                    <input type="number" id="site-size" placeholder="Enter site size">
+                                </div>
+                                <button class="btn-primary analyze-btn">
+                                    <i class="fas fa-search"></i>
+                                    Analyze Site
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="permit-checker">
+                            <h3>Permit Requirements</h3>
+                            <div class="tool-content">
+                                <div class="form-group">
+                                    <label for="project-type">Project Type</label>
+                                    <select id="project-type">
+                                        <option value="residential">Residential</option>
+                                        <option value="commercial">Commercial</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="zoning-type">Zoning Type</label>
+                                    <select id="zoning-type">
+                                        <option value="residential">Residential</option>
+                                        <option value="commercial">Commercial</option>
+                                        <option value="mixed">Mixed Use</option>
+                                    </select>
+                                </div>
+                                <button class="btn-primary check-btn">
+                                    <i class="fas fa-clipboard-check"></i>
+                                    Check Requirements
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <script src="../js/navigation.js"></script>
+    <script src="../js/tabs.js"></script>
+    <script src="../js/phase-manager.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.tabManager = new TabManager();
+            window.phaseManager = new PhaseManager();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Estimator - BuildSmart Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation placeholder -->
+    <nav id="navbar"></nav>
+    
+    <main>
+        <section class="estimator">
+            <div class="container">
+                <h1>Construction Cost Estimator</h1>
+                <p class="section-subtitle">Get accurate cost estimates for your construction project</p>
+
+                <!-- Property Selection -->
+                <div class="property-selector">
+                    <h2>Select Your Property Size</h2>
+                    <div class="property-grid">
+                        <div class="property-card" data-size="5">
+                            <h3>5 Marla</h3>
+                            <p class="size-details">~125 sq.yd / 104.5 sq.m</p>
+                            <button class="btn-select">Select</button>
+                        </div>
+                        <div class="property-card" data-size="10">
+                            <h3>10 Marla</h3>
+                            <p class="size-details">~250 sq.yd / 209 sq.m</p>
+                            <button class="btn-select">Select</button>
+                        </div>
+                        <div class="property-card" data-size="20">
+                            <h3>1 Kanal</h3>
+                            <p class="size-details">~500 sq.yd / 418 sq.m</p>
+                            <button class="btn-select">Select</button>
+                        </div>
+                        <div class="property-card" data-size="40">
+                            <h3>2 Kanal</h3>
+                            <p class="size-details">~1000 sq.yd / 836 sq.m</p>
+                            <button class="btn-select">Select</button>
+                        </div>
+                    </div>
+
+                    <div class="custom-size">
+                        <h3>Custom Size</h3>
+                        <div class="input-group">
+                            <input type="number" id="custom-size" placeholder="Enter size">
+                            <select id="size-unit">
+                                <option value="marla">Marla</option>
+                                <option value="kanal">Kanal</option>
+                                <option value="sqyd">Square Yards</option>
+                                <option value="sqm">Square Meters</option>
+                            </select>
+                            <button class="btn-primary">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cost Calculator -->
+                <div class="cost-calculator">
+                    <h2>Cost Calculator</h2>
+                    <div class="calculator-grid">
+                        <div class="calculator-inputs">
+                            <div class="form-group">
+                                <label for="construction-type">Construction Type</label>
+                                <select id="construction-type">
+                                    <option value="residential">Residential</option>
+                                    <option value="commercial">Commercial</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="quality-level">Quality Level</label>
+                                <select id="quality-level">
+                                    <option value="basic">Basic</option>
+                                    <option value="standard">Standard</option>
+                                    <option value="premium">Premium</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <select id="location">
+                                    <option value="urban">Urban</option>
+                                    <option value="suburban">Suburban</option>
+                                    <option value="rural">Rural</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="floors">Number of Floors</label>
+                                <input type="number" id="floors" min="1" max="10" value="1">
+                            </div>
+                            <button class="btn-primary" id="calculate-cost">Calculate Cost</button>
+                        </div>
+
+                        <div class="cost-breakdown">
+                            <h3>Cost Breakdown</h3>
+                            <div class="breakdown-chart">
+                                <canvas id="costChart"></canvas>
+                            </div>
+                            <div class="breakdown-details">
+                                <div class="breakdown-item">
+                                    <span>Foundation</span>
+                                    <span class="cost" id="foundation-cost">$0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Structure</span>
+                                    <span class="cost" id="structure-cost">$0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Finishing</span>
+                                    <span class="cost" id="finishing-cost">$0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Utilities</span>
+                                    <span class="cost" id="utilities-cost">$0</span>
+                                </div>
+                                <div class="breakdown-item total">
+                                    <span>Total Estimated Cost</span>
+                                    <span class="cost" id="total-cost">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Breakdown -->
+                <div class="detailed-breakdown">
+                    <h2>Detailed Cost Breakdown</h2>
+                    <div class="breakdown-tabs">
+                        <button class="tab-btn active" data-tab="materials">Materials</button>
+                        <button class="tab-btn" data-tab="labor">Labor</button>
+                        <button class="tab-btn" data-tab="timeline">Timeline</button>
+                    </div>
+
+                    <div class="tab-content active" id="materials">
+                        <div class="table-container">
+                            <table class="breakdown-table">
+                                <thead>
+                                    <tr>
+                                        <th>Material</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="materials-breakdown">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="labor">
+                        <div class="table-container">
+                            <table class="breakdown-table">
+                                <thead>
+                                    <tr>
+                                        <th>Labor Type</th>
+                                        <th>Days Required</th>
+                                        <th>Rate per Day</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="labor-breakdown">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="timeline">
+                        <div class="timeline-container">
+                            <div class="timeline" id="construction-timeline">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Options -->
+                <div class="export-options">
+                    <button class="btn-secondary" id="save-estimate">
+                        <i class="fas fa-save"></i> Save Estimate
+                    </button>
+                    <button class="btn-primary" id="export-pdf">
+                        <i class="fas fa-file-pdf"></i> Export as PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <script src="../js/navigation.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html> 

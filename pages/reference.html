@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference - BuildSmart Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+</head>
+<body>
+    <!-- Navigation placeholder -->
+    <nav id="navbar"></nav>
+
+    <main>
+        <section class="reference">
+            <div class="container">
+                <h1>Reference Materials</h1>
+                <p class="section-subtitle">Comprehensive resources for your construction project</p>
+
+                <!-- Materials Database -->
+                <div class="materials-database">
+                    <h2>Materials Database</h2>
+                    <div class="search-filters">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search materials...">
+                            <button class="btn-search">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="filter-options">
+                            <select id="category-filter">
+                                <option value="">All Categories</option>
+                                <option value="structural">Structural</option>
+                                <option value="finishing">Finishing</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="plumbing">Plumbing</option>
+                            </select>
+                            <select id="price-filter">
+                                <option value="">Price Range</option>
+                                <option value="budget">Budget</option>
+                                <option value="standard">Standard</option>
+                                <option value="premium">Premium</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="materials-grid">
+                        <!-- Material cards will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Contractor Directory -->
+                <div class="contractor-directory">
+                    <h2>Contractor Directory</h2>
+                    <div class="directory-filters">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search contractors...">
+                            <button class="btn-search">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="filter-options">
+                            <select id="specialty-filter">
+                                <option value="">All Specialties</option>
+                                <option value="general">General Contractor</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="hvac">HVAC</option>
+                            </select>
+                            <select id="rating-filter">
+                                <option value="">Rating</option>
+                                <option value="5">5 Stars</option>
+                                <option value="4">4+ Stars</option>
+                                <option value="3">3+ Stars</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="contractors-grid">
+                        <!-- Contractor cards will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Building Codes & Standards -->
+                <div class="building-codes">
+                    <h2>Building Codes & Standards</h2>
+                    <div class="codes-grid">
+                        <div class="code-category">
+                            <h3>Residential Construction</h3>
+                            <ul class="code-list">
+                                <li>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>International Residential Code (IRC)</span>
+                                    <a href="#" class="btn-outline">View</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>Local Building Regulations</span>
+                                    <a href="#" class="btn-outline">View</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="code-category">
+                            <h3>Safety Standards</h3>
+                            <ul class="code-list">
+                                <li>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>OSHA Safety Guidelines</span>
+                                    <a href="#" class="btn-outline">View</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>Fire Safety Codes</span>
+                                    <a href="#" class="btn-outline">View</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Educational Resources -->
+                <div class="educational-resources">
+                    <h2>Educational Resources</h2>
+                    <div class="resources-grid">
+                        <div class="resource-card">
+                            <div class="resource-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <h3>Video Tutorials</h3>
+                            <p>Step-by-step construction guides and best practices</p>
+                            <a href="#" class="btn-outline">Browse Videos</a>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3>Construction Guides</h3>
+                            <p>Detailed manuals and technical documentation</p>
+                            <a href="#" class="btn-outline">View Guides</a>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h3>Calculators</h3>
+                            <p>Tools for material quantity and cost estimation</p>
+                            <a href="#" class="btn-outline">Use Tools</a>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <h3>Checklists</h3>
+                            <p>Quality control and inspection checklists</p>
+                            <a href="#" class="btn-outline">View Checklists</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What permits do I need for construction?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>The required permits vary by location and project type. Common permits include building permits, electrical permits, plumbing permits, and zoning permits. Contact your local building department for specific requirements.</p>
+                            </div>
+                        </div>
+                        <!-- More FAQ items will be added by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <script src="../js/navigation.js"></script>
+    <script src="../js/reference.js"></script>
+</body>
+</html> 

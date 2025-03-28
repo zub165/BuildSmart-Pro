@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildSmart Pro - Editable Construction Estimator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --secondary-light: #fbbf24;
+            --light: #f8fafc;
+            --light-gray: #e2e8f0;
+            --dark: #1e293b;
+            --dark-gray: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius: 0.5rem;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f1f5f9;
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(29, 78, 216, 0.9) 100%), 
+                        url('construction-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 60vh;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+        
+        .card {
+            border: none;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .property-card {
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .property-card.active {
+            border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+        
+        .progress-tracker {
+            position: relative;
+        }
+        
+        .progress-step {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+        
+        .progress-tracker::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--light-gray);
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+        
+        .progress-step.active .step-bubble {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .progress-step.completed .step-bubble {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        
+        .step-bubble {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--light-gray);
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 0.5rem;
+            font-weight: 600;
+        }
+        
+        .material-item {
+            border-left: 3px solid var(--primary);
+            transition: all 0.2s;
+        }
+        
+        .material-item:hover {
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+        
+        .editable-field {
+            border-bottom: 1px dashed var(--dark-gray);
+            cursor: pointer;
+            padding: 0.1rem 0.2rem;
+            min-width: 60px;
+            display: inline-block;
+        }
+        
+        .editable-field:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+            border-bottom-color: var(--primary);
+        }
+        
+        .edit-input {
+            border: 1px solid var(--primary);
+            border-radius: 0.25rem;
+            padding: 0.1rem 0.3rem;
+            width: 80px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .badge {
+            font-weight: 500;
+            padding: 0.35em 0.65em;
+        }
+        
+        .task-completed {
+            text-decoration: line-through;
+            color: var(--dark-gray);
+        }
+        
+        .cost-summary-card {
+            position: sticky;
+            top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .progress-tracker {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .progress-tracker::before {
+                left: 1rem;
+                top: 0;
+                bottom: 0;
+                width: 4px;
+                height: auto;
+                transform: none;
+            }
+            
+            .progress-step {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+            
+            .step-bubble {
+                margin: 0 1rem 0 0;
+                flex-shrink: 0;
+            }
+            
+            .cost-summary-card {
+                position: static;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-hard-hat me-2"></i>BuildSmart Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#estimator"><i class="fas fa-calculator me-1"></i> Estimator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#guide"><i class="fas fa-map-signs me-1"></i> Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resources"><i class="fas fa-book me-1"></i> Resources</a>
+                    </li>
+                    <li class="nav-item ml-2">
+                        <a class="btn btn-outline-primary btn-sm" href="#"><i class="fas fa-user me-1"></i> Sign In</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero d-flex align-items-center text-white">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Build Smarter, Not Harder</h1>
+            <p class="lead mb-5 fs-4">Accurate, editable cost estimates and step-by-step guidance for your construction project</p>
+            <a href="#estimator" class="btn btn-light btn-lg px-4 py-2 fw-bold">
+                <i class="fas fa-play me-2"></i>Start Your Project
+            </a>
+        </div>
+    </section>
+
+    <!-- Property Selector -->
+    <section id="estimator" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Select Your Property Size</h2>
+                <p class="text-muted">Choose your plot size to get customized estimates</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="card property-card text-center p-4 active" data-size="5">
+                        <div class="card-body">
+                            <div class="icon-lg bg-primary-light text-primary rounded-circle mx-auto mb-3">
+                                <i class="fas fa-home fs-4"></i>
+                            </div>
+                            <h3 class="h4">5 Marla</h3>
+                            <p class="text-muted mb-4">~125 sq.yd / 104.5 sq.m</p>
+                            <button class="btn btn-sm btn-primary">Select</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card property-card text-center p-4" data-size="10">
+                        <div class="card-body">
+                            <div class="icon-lg bg-primary-light text-primary rounded-circle mx-auto mb-3">
+                                <i class="fas fa-home fs-4"></i>
+                            </div>
+                            <h3 class="h4">10 Marla</h3>
+                            <p class="text-muted mb-4">~250 sq.yd / 209 sq.m</p>
+                            <button class="btn btn-sm btn-primary">Select</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card property-card text-center p-4" data-size="1">
+                        <div class="card-body">
+                            <div class="icon-lg bg-primary-light text-primary rounded-circle mx-auto mb-3">
+                                <i class="fas fa-building fs-4"></i>
+                            </div>
+                            <h3 class="h4">1 Kanal</h3>
+                            <p class="text-muted mb-4">~500 sq.yd / 418 sq.m</p>
+                            <button class="btn btn-sm btn-primary">Select</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card property-card text-center p-4" data-size="2">
+                        <div class="card-body">
+                            <div class="icon-lg bg-primary-light text-primary rounded-circle mx-auto mb-3">
+                                <i class="fas fa-building fs-4"></i>
+                            </div>
+                            <h3 class="h4">2 Kanal</h3>
+                            <p class="text-muted mb-4">~1000 sq.yd / 836 sq.m</p>
+                            <button class="btn btn-sm btn-primary">Select</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-outline-primary active">
+                        <input type="radio" name="units" checked> Imperial (Marla/Kanal)
+                    </label>
+                    <label class="btn btn-outline-primary">
+                        <input type="radio" name="units"> Metric (sq.m)
+                    </label>
+                </div>
+                <div class="mt-3">
+                    <a href="#" class="text-primary" data-toggle="modal" data-target="#sizeGuideModal">
+                        <i class="fas fa-question-circle me-1"></i>Not sure about your plot size?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Tracker -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Construction Progress</h2>
+                <p class="text-muted">Track each phase of your project</p>
+            </div>
+            <div class="progress-tracker d-flex justify-content-between position-relative mb-5">
+                <div class="progress-step completed">
+                    <div class="step-bubble">1</div>
+                    <div class="step-label fw-medium">Site Prep</div>
+                </div>
+                <div class="progress-step completed">
+                    <div class="step-bubble">2</div>
+                    <div class="step-label fw-medium">Foundation</div>
+                </div>
+                <div class="progress-step active">
+                    <div class="step-bubble">3</div>
+                    <div class="step-label fw-medium">Structure</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-bubble">4</div>
+                    <div class="step-label fw-medium">Utilities</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-bubble">5</div>
+                    <div class="step-label fw-medium">Finishing</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Step Detail -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-header bg-white border-bottom-0">
+                            <h3 class="mb-0">Structure Construction</h3>
+                            <p class="text-muted">Columns, beams, brickwork, and roof slab</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h4 class="mb-0">Tasks</h4>
+                                <span class="badge bg-primary-light text-primary">60% Complete</span>
+                            </div>
+                            
+                            <div class="list-group mb-4">
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="task1" checked>
+                                        <label class="form-check-label task-completed" for="task1">Column construction</label>
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">Completed</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="task2" checked>
+                                        <label class="form-check-label task-completed" for="task2">Beam construction</label>
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">Completed</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="task3">
+                                        <label class="form-check-label" for="task3">Brickwork/blockwork</label>
+                                    </div>
+                                    <span class="badge bg-warning rounded-pill">In Progress</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="task4">
+                                        <label class="form-check-label" for="task4">Lintel installation</label>
+                                    </div>
+                                    <span class="badge bg-light text-dark rounded-pill">Pending</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="task5">
+                                        <label class="form-check-label" for="task5">Roof slab</label>
+                                    </div>
+                                    <span class="badge bg-light text-dark rounded-pill">Pending</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="mb-3">Materials Required</h4>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th>Material</th>
+                                            <th>Quantity</th>
+                                            <th>Unit Price</th>
+                                            <th>Total</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="material-item">
+                                            <td>Cement (50kg bags)</td>
+                                            <td>
+                                                <span class="editable-field" data-field="quantity">120</span>
+                                            </td>
+                                            <td>
+                                                <span class="editable-field" data-field="unitPrice">$8.50</span>
+                                            </td>
+                                            <td>$1,020.00</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="material-item">
+                                            <td>Steel Bars (1 ton)</td>
+                                            <td>
+                                                <span class="editable-field" data-field="quantity">2.5</span>
+                                            </td>
+                                            <td>
+                                                <span class="editable-field" data-field="unitPrice">$850.00</span>
+                                            </td>
+                                            <td>$2,125.00</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="material-item">
+                                            <td>Bricks (1000 units)</td>
+                                            <td>
+                                                <span class="editable-field" data-field="quantity">45</span>
+                                            </td>
+                                            <td>
+                                                <span class="editable-field" data-field="unitPrice">$55.00</span>
+                                            </td>
+                                            <td>$2,475.00</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="material-item">
+                                            <td>Crush (1 ton)</td>
+                                            <td>
+                                                <span class="editable-field" data-field="quantity">15</span>
+                                            </td>
+                                            <td>
+                                                <span class="editable-field" data-field="unitPrice">$25.00</span>
+                                            </td>
+                                            <td>$375.00</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-end fw-bold">Subtotal:</td>
+                                            <td class="fw-bold">$5,995.00</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end mt-3">
+                                <button class="btn btn-outline-primary me-2">
+                                    <i class="fas fa-plus me-1"></i>Add Material
+                                </button>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-save me-1"></i>Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header bg-white border-bottom-0">
+                            <h4>Labor Costs</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th>Labor Type</th>
+                                            <th>Days Required</th>
+                                            <th>Rate Per Day</th>
+                                            <th>Total</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="material-item">
+                                            <td>Mason</td>
+                                            <td>
+                                                <span class="editable-field" data-field="days">25</span>
+                                            </td>
+                                            <td>
+                                                <span class="editable-field" data-field="rate">$25.00</span>
+                                            </td>
+                                            <td>$625.00</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="material-item">
+                                            <td>Steel Fixer</td>
+                                            <td>
+                                                <span class="editable-field" data-field="days">12</span>
+                                            </td>
+                                            <td>
+                                                <span class="editable-field" data-field="rate">$30.00</span>
+                                            </td>
+                                            <td>$360.00</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="material-item">
+                                            <td>Helper</td>
+                                            <td>
+                                                <span class="editable-field" data-field="days">40</span>
+                                            </td>
+                                            <td>
+                                                <span class="editable-field" data-field="rate">$15.00</span>
+                                            </td>
+                                            <td>$600.00</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-end fw-bold">Subtotal:</td>
+                                            <td class="fw-bold">$1,585.00</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end mt-3">
+                                <button class="btn btn-outline-primary me-2">
+                                    <i class="fas fa-plus me-1"></i>Add Labor
+                                </button>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-save me-1"></i>Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card cost-summary-card shadow">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-calculator me-2"></i>Cost Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <h6 class="d-flex justify-content-between">
+                                    <span>Structure Construction</span>
+                                    <span>$7,580.00</span>
+                                </h6>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 60%"></div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-2 small">
+                                    <span class="text-muted">$4,548.00 spent</span>
+                                    <span class="text-muted">$3,032.00 remaining</span>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="mb-3">
+                                <h6 class="d-flex justify-content-between">
+                                    <span>Materials</span>
+                                    <span>$5,995.00</span>
+                                </h6>
+                                <h6 class="d-flex justify-content-between mt-2">
+                                    <span>Labor</span>
+                                    <span>$1,585.00</span>
+                                </h6>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="mb-4">
+                                <h4 class="d-flex justify-content-between">
+                                    <span>Total Project</span>
+                                    <span>$24,500.00</span>
+                                </h4>
+                                <small class="text-muted">Estimated total for 5 Marla house</small>
+                            </div>
+                            
+                            <button class="btn btn-primary w-100 mb-3">
+                                <i class="fas fa-edit me-1"></i>Adjust Total Budget
+                            </button>
+                            
+                            <button class="btn btn-outline-primary w-100">
+                                <i class="fas fa-file-pdf me-1"></i>Export Estimate
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow mt-4">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0"><i class="fas fa-clipboard-check me-2"></i>Quality Checklist</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="check1" checked>
+                                <label class="form-check-label" for="check1">Columns properly aligned</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="check2" checked>
+                                <label class="form-check-label" for="check2">Beam dimensions as per plan</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="check3">
+                                <label class="form-check-label" for="check3">Brickwork joints properly filled</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="check4">
+                                <label class="form-check-label" for="check4">Concrete curing done properly</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="check5">
+                                <label class="form-check-label" for="check5">Structural engineer approval</label>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-outline-primary w-100 mt-3">
+                                <i class="fas fa-plus me-1"></i>Add Custom Check
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow mt-4">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0"><i class="fas fa-sticky-note me-2"></i>Notes</h5>
+                        </div>
+                        <div class="card-body">
+                            <textarea class="form-control" rows="4" placeholder="Add your notes for this phase..."></textarea>
+                            <button class="btn btn-sm btn-primary mt-2">
+                                <i class="fas fa-save me-1"></i>Save Notes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Size Guide Modal -->
+    <div class="modal fade" id="sizeGuideModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Property Size Guide</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Unit</th>
+                                    <th>Square Yards</th>
+                                    <th>Square Meters</th>
+                                    <th>Square Feet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1 Marla</td>
+                                    <td>25</td>
+                                    <td>20.9</td>
+                                    <td>225</td>
+                                </tr>
+                                <tr>
+                                    <td>5 Marla</td>
+                                    <td>125</td>
+                                    <td>104.5</td>
+                                    <td>1,125</td>
+                                </tr>
+                                <tr>
+                                    <td>10 Marla</td>
+                                    <td>250</td>
+                                    <td>209</td>
+                                    <td>2,250</td>
+                                </tr>
+                                <tr>
+                                    <td>1 Kanal</td>
+                                    <td>500</td>
+                                    <td>418</td>
+                                    <td>4,500</td>
+                                </tr>
+                                <tr>
+                                    <td>2 Kanal</td>
+                                    <td>1,000</td>
+                                    <td>836</td>
+                                    <td>9,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Property selection
+            $('.property-card').click(function() {
+                $('.property-card').removeClass('active');
+                $(this).addClass('active');
+                // Load appropriate data for selected property size
+                const size = $(this).data('size');
+                loadProjectData(size);
+            });
+            
+            // Unit conversion toggle
+            $('input[name="units"]').change(function() {
+                const isMetric = $(this).val() === 'metric';
+                convertUnits(isMetric);
+            });
+            
+            // Editable fields
+            $(document).on('click', '.editable-field', function() {
+                const currentValue = $(this).text();
+                const fieldName = $(this).data('field');
+                const input = $('<input>', {
+                    type: 'text',
+                    val: currentValue,
+                    class: 'edit-input form-control form-control-sm',
+                    'data-field': fieldName
+                });
+                
+                $(this).html(input);
+                input.focus();
+            });
+            
+            $(document).on('blur', '.edit-input', function() {
+                const newValue = $(this).val();
+                const fieldName = $(this).data('field');
+                const parentTd = $(this).closest('td');
+                
+                parentTd.html(`<span class="editable-field" data-field="${fieldName}">${newValue}</span>`);
+                
+                // Recalculate totals
+                recalculateRow(parentTd.closest('tr'));
+                recalculateSectionTotals();
+            });
+            
+            // Task completion
+            $('.form-check-input').change(function() {
+                const label = $(this).siblings('.form-check-label');
+                if($(this).is(':checked')) {
+                    label.addClass('task-completed');
+                } else {
+                    label.removeClass('task-completed');
+                }
+                updateProgress();
+            });
+            
+            // Initialize functions
+            function loadProjectData(size) {
+                // In a real app, this would load data from an API
+                console.log(`Loading data for ${size} Marla/Kanal property`);
+            }
+            
+            function convertUnits(isMetric) {
+                // In a real app, this would convert all displayed units
+                console.log(`Converting to ${isMetric ? 'metric' : 'imperial'} units`);
+            }
+            
+            function recalculateRow(row) {
+                const quantity = parseFloat(row.find('[data-field="quantity"]').text()) || 
+                                parseFloat(row.find('[data-field="days"]').text()) || 0;
+                const unitPrice = parseFloat(row.find('[data-field="unitPrice"]').text()) || 
+                                  parseFloat(row.find('[data-field="rate"]').text()) || 0;
+                const total = quantity * unitPrice;
+                
+                row.find('td:eq(3)').text('$' + total.toFixed(2));
+            }
+            
+            function recalculateSectionTotals() {
+                // This would calculate subtotals for materials and labor
+                console.log('Recalculating section totals');
+            }
+            
+            function updateProgress() {
+                // Update progress bars based on completed tasks
+                console.log('Updating progress tracking');
+            }
+        });
+    </script>
+</body>
+</html>

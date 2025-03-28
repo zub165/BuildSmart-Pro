@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildSmart Pro - Construction Cost Estimator</title>
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+</head>
+<body>
+    <nav id="navbar"></nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Transform Your Construction Vision into Reality</h1>
+                <p class="hero-subtitle">Get accurate cost estimates, expert guidance, and powerful planning tools for your construction project.</p>
+                <div class="hero-buttons">
+                    <a href="pages/estimator.html" class="btn-primary">
+                        <i class="fas fa-calculator"></i>
+                        Get Started
+                    </a>
+                    <a href="pages/guide.html" class="btn-secondary">
+                        <i class="fas fa-book"></i>
+                        View Guide
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div id="construction-animation"></div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Why Choose BuildSmart Pro</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Accurate Estimates</h3>
+                    <p>Get precise cost calculations based on real market data and regional pricing factors.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Project Planning</h3>
+                    <p>Comprehensive tools for timeline planning, resource allocation, and progress tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Custom Designs</h3>
+                    <p>Choose from various architectural styles or customize your own unique design.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your project's progress with detailed phase tracking and milestone updates.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <h2>How It Works</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-bubble">1</div>
+                    <div class="timeline-content">
+                        <h3>Choose Your Style</h3>
+                        <p>Browse through our collection of architectural styles or customize your own design preferences.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-bubble">2</div>
+                    <div class="timeline-content">
+                        <h3>Get Your Estimate</h3>
+                        <p>Receive detailed cost breakdowns based on your location and project specifications.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-bubble">3</div>
+                    <div class="timeline-content">
+                        <h3>Plan Timeline</h3>
+                        <p>Create a comprehensive project timeline with our phase-by-phase planning tools.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-bubble">4</div>
+                    <div class="timeline-content">
+                        <h3>Start Building</h3>
+                        <p>Begin your construction project with confidence using our detailed guides and tracking tools.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-styles">
+            <h2>Explore Home Styles</h2>
+            <div class="slideshow-container">
+                <!-- Navigation Buttons -->
+                <button class="nav-button prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-button next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Slides -->
+                <div class="slides-wrapper">
+                    <div class="style-slide active" data-style="turkish">
+                        <div class="style-card">
+                            <div class="style-image">
+                                <img src="assets/images/turkish-home.jpg" alt="Turkish Home Style">
+                            </div>
+                            <div class="style-content">
+                                <h3>Turkish Architecture</h3>
+                                <p>Ottoman-inspired designs with ornate details, domed structures, and traditional elements.</p>
+                                <div class="style-actions">
+                                    <a href="#" class="btn-outline">Learn More</a>
+                                    <div class="edit-controls">
+                                        <button class="edit-button edit">
+                                            <i class="fas fa-edit"></i>
+                                            Edit
+                                        </button>
+                                        <button class="edit-button replace">
+                                            <i class="fas fa-image"></i>
+                                            Replace
+                                        </button>
+                                        <button class="edit-button delete">
+                                            <i class="fas fa-trash"></i>
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="style-slide" data-style="american">
+                        <div class="style-card">
+                            <div class="style-image">
+                                <img src="assets/images/american-home.jpg" alt="American Home Style">
+                            </div>
+                            <div class="style-content">
+                                <h3>American Architecture</h3>
+                                <p>Modern suburban designs with open floor plans, spacious yards, and contemporary amenities.</p>
+                                <div class="style-actions">
+                                    <a href="#" class="btn-outline">Learn More</a>
+                                    <div class="edit-controls">
+                                        <button class="edit-button edit">
+                                            <i class="fas fa-edit"></i>
+                                            Edit
+                                        </button>
+                                        <button class="edit-button replace">
+                                            <i class="fas fa-image"></i>
+                                            Replace
+                                        </button>
+                                        <button class="edit-button delete">
+                                            <i class="fas fa-trash"></i>
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="style-slide" data-style="iranian">
+                        <div class="style-card">
+                            <div class="style-image">
+                                <img src="assets/images/iranian-home.jpg" alt="Iranian Home Style">
+                            </div>
+                            <div class="style-content">
+                                <h3>Iranian Architecture</h3>
+                                <p>Persian-influenced designs featuring geometric patterns, courtyards, and traditional Islamic architecture.</p>
+                                <div class="style-actions">
+                                    <a href="#" class="btn-outline">Learn More</a>
+                                    <div class="edit-controls">
+                                        <button class="edit-button edit">
+                                            <i class="fas fa-edit"></i>
+                                            Edit
+                                        </button>
+                                        <button class="edit-button replace">
+                                            <i class="fas fa-image"></i>
+                                            Replace
+                                        </button>
+                                        <button class="edit-button delete">
+                                            <i class="fas fa-trash"></i>
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="style-slide" data-style="spanish">
+                        <div class="style-card">
+                            <div class="style-image">
+                                <img src="assets/images/spanish-home.jpg" alt="Spanish Home Style">
+                            </div>
+                            <div class="style-content">
+                                <h3>Spanish Architecture</h3>
+                                <p>Mediterranean-inspired designs with stucco walls, terracotta roofs, and elegant archways.</p>
+                                <div class="style-actions">
+                                    <a href="#" class="btn-outline">Learn More</a>
+                                    <div class="edit-controls">
+                                        <button class="edit-button edit">
+                                            <i class="fas fa-edit"></i>
+                                            Edit
+                                        </button>
+                                        <button class="edit-button replace">
+                                            <i class="fas fa-image"></i>
+                                            Replace
+                                        </button>
+                                        <button class="edit-button delete">
+                                            <i class="fas fa-trash"></i>
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dots Navigation -->
+                <div class="dots-nav">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="cta-content">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Get accurate estimates and expert guidance for your construction journey.</p>
+                <a href="pages/estimator.html" class="btn-secondary">Start Building Today</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/gallery-manager.js"></script>
+    <script src="js/animation-manager.js"></script>
+</body>
+</html> 

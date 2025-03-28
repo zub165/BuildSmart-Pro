@@ -1,0 +1,145 @@
+{
+    "common": {
+        "essentialSteps": "Essential Steps",
+        "resourcesAndTips": "Resources & Tips",
+        "duration": "Duration",
+        "cost": "Cost",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "add": "Add",
+        "loading": "Loading...",
+        "error": "Error loading content. Please try again."
+    },
+    "phases": {
+        "planning": {
+            "title": "Planning Phase",
+            "description": "Initial planning and preparation for your construction project",
+            "steps": {
+                "siteAnalysis": {
+                    "title": "Site Analysis",
+                    "description": "Evaluate soil conditions, topography, and surrounding environment"
+                },
+                "legalRequirements": {
+                    "title": "Legal Requirements",
+                    "description": "Obtain necessary permits and ensure compliance with local building codes"
+                },
+                "designDevelopment": {
+                    "title": "Design Development",
+                    "description": "Finalize architectural plans and structural designs"
+                }
+            }
+        },
+        "foundation": {
+            "title": "Foundation Phase",
+            "description": "Establishing a solid foundation for your building",
+            "steps": {
+                "soilTesting": {
+                    "title": "Soil Testing",
+                    "description": "Analyze soil composition and load-bearing capacity"
+                },
+                "excavation": {
+                    "title": "Excavation",
+                    "description": "Prepare the site and dig foundation trenches"
+                },
+                "reinforcement": {
+                    "title": "Reinforcement",
+                    "description": "Install steel reinforcement bars and formwork"
+                }
+            }
+        },
+        "structure": {
+            "title": "Structure Phase",
+            "description": "Building the main structure of your project",
+            "steps": {
+                "framing": {
+                    "title": "Framing",
+                    "description": "Construct walls, floors, and roof framework"
+                },
+                "roofing": {
+                    "title": "Roofing",
+                    "description": "Install roofing materials and drainage systems"
+                },
+                "exterior": {
+                    "title": "Exterior Work",
+                    "description": "Complete exterior walls and weatherproofing"
+                }
+            }
+        },
+        "utilities": {
+            "title": "Utilities Phase",
+            "description": "Installing essential utilities and systems",
+            "steps": {
+                "electrical": {
+                    "title": "Electrical Systems",
+                    "description": "Install electrical wiring and fixtures"
+                },
+                "plumbing": {
+                    "title": "Plumbing Systems",
+                    "description": "Install water supply and drainage pipes"
+                },
+                "hvac": {
+                    "title": "HVAC Systems",
+                    "description": "Install heating, ventilation, and air conditioning"
+                }
+            }
+        },
+        "finishing": {
+            "title": "Finishing Phase",
+            "description": "Completing interior and exterior finishes",
+            "steps": {
+                "interiorFinishes": {
+                    "title": "Interior Finishes",
+                    "description": "Install drywall, flooring, and paint"
+                },
+                "fixtures": {
+                    "title": "Fixtures & Fittings",
+                    "description": "Install bathroom and kitchen fixtures"
+                },
+                "finalTouches": {
+                    "title": "Final Touches",
+                    "description": "Complete trim work and final cleaning"
+                }
+            }
+        }
+    },
+    "resources": {
+        "guides": {
+            "title": "Guides & Documentation",
+            "permitGuide": "Building Permit Guide",
+            "safetyGuide": "Safety Guidelines",
+            "qualityChecklist": "Quality Control Checklist"
+        },
+        "tools": {
+            "title": "Tools & Calculators",
+            "costCalculator": "Cost Calculator",
+            "materialEstimator": "Material Estimator",
+            "timelineGenerator": "Timeline Generator"
+        },
+        "tips": {
+            "title": "Expert Tips",
+            "planning": {
+                "title": "Planning Tips",
+                "tip1": "Always conduct thorough soil testing",
+                "tip2": "Include a 10-15% contingency in your budget",
+                "tip3": "Maintain detailed records of all permits"
+            }
+        }
+    },
+    "ui": {
+        "theme": {
+            "light": "Light Theme",
+            "dark": "Dark Theme",
+            "system": "System Theme"
+        },
+        "language": {
+            "select": "Select Language",
+            "en": "English",
+            "es": "Español",
+            "fr": "Français",
+            "de": "Deutsch",
+            "zh": "中文"
+        }
+    }
+} 

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floor Plan Designer - BuildSmart Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+</head>
+<body>
+    <!-- Navigation placeholder -->
+    <nav id="navbar"></nav>
+
+    <main>
+        <section class="floor-plan">
+            <div class="container">
+                <h1>Floor Plan Designer</h1>
+                <p class="section-subtitle">Design and customize your dream home layout</p>
+
+                <div class="floor-plan-container">
+                    <!-- Layout Selection -->
+                    <div class="layout-selection">
+                        <h2>Choose Layout Type</h2>
+                        <div class="layout-options">
+                            <button class="layout-btn active" data-layout="standard">
+                                <i class="fas fa-home"></i>
+                                <span>Standard</span>
+                            </button>
+                            <button class="layout-btn" data-layout="modern">
+                                <i class="fas fa-building"></i>
+                                <span>Modern</span>
+                            </button>
+                            <button class="layout-btn" data-layout="luxury">
+                                <i class="fas fa-hotel"></i>
+                                <span>Luxury</span>
+                            </button>
+                            <button class="layout-btn" data-layout="custom">
+                                <i class="fas fa-pencil-ruler"></i>
+                                <span>Custom</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Floor Plan Viewer -->
+                    <div class="floor-plan-viewer">
+                        <div class="viewer-toolbar">
+                            <div class="tool-group">
+                                <button class="tool-btn" title="Zoom In">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="tool-btn" title="Zoom Out">
+                                    <i class="fas fa-search-minus"></i>
+                                </button>
+                                <button class="tool-btn" title="Reset View">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+                            </div>
+                            <div class="tool-group">
+                                <button class="tool-btn" title="Move">
+                                    <i class="fas fa-arrows-alt"></i>
+                                </button>
+                                <button class="tool-btn" title="Draw Wall">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                                <button class="tool-btn" title="Add Room">
+                                    <i class="fas fa-vector-square"></i>
+                                </button>
+                            </div>
+                            <div class="tool-group">
+                                <button class="tool-btn" title="Add Door">
+                                    <i class="fas fa-door-open"></i>
+                                </button>
+                                <button class="tool-btn" title="Add Window">
+                                    <i class="fas fa-window-maximize"></i>
+                                </button>
+                                <button class="tool-btn" title="Add Furniture">
+                                    <i class="fas fa-couch"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="viewer-canvas">
+                            <!-- Canvas for floor plan will be initialized by JavaScript -->
+                            <canvas id="floorPlanCanvas"></canvas>
+                        </div>
+
+                        <div class="viewer-sidebar">
+                            <div class="room-details">
+                                <h3>Room Details</h3>
+                                <div class="room-list">
+                                    <!-- Room details will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            <div class="dimensions">
+                                <h3>Dimensions</h3>
+                                <div class="dimension-inputs">
+                                    <div class="form-group">
+                                        <label for="room-width">Width (ft)</label>
+                                        <input type="number" id="room-width" min="1" step="0.5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="room-length">Length (ft)</label>
+                                        <input type="number" id="room-length" min="1" step="0.5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="room-area">Area (sq ft)</label>
+                                        <input type="text" id="room-area" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customization Options -->
+                    <div class="customization-options">
+                        <h2>Customize Your Plan</h2>
+                        <div class="options-grid">
+                            <div class="option-group">
+                                <h3>Room Types</h3>
+                                <div class="room-types">
+                                    <button class="room-type-btn" data-type="bedroom">
+                                        <i class="fas fa-bed"></i>
+                                        <span>Bedroom</span>
+                                    </button>
+                                    <button class="room-type-btn" data-type="bathroom">
+                                        <i class="fas fa-bath"></i>
+                                        <span>Bathroom</span>
+                                    </button>
+                                    <button class="room-type-btn" data-type="kitchen">
+                                        <i class="fas fa-utensils"></i>
+                                        <span>Kitchen</span>
+                                    </button>
+                                    <button class="room-type-btn" data-type="living">
+                                        <i class="fas fa-couch"></i>
+                                        <span>Living Room</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="option-group">
+                                <h3>Furniture</h3>
+                                <div class="furniture-list">
+                                    <!-- Furniture options will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="floor-plan-actions">
+                        <button class="btn-secondary" id="save-draft">
+                            <i class="fas fa-save"></i> Save Draft
+                        </button>
+                        <button class="btn-secondary" id="share-plan">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                        <button class="btn-primary" id="export-plan">
+                            <i class="fas fa-file-export"></i> Export Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <script src="../js/navigation.js"></script>
+    <script src="../js/floor-plan.js"></script>
+</body>
+</html> 
